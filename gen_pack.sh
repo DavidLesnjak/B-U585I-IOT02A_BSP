@@ -4,12 +4,14 @@
 # This bash script generates a CMSIS Software Pack:
 #
 
+# shellcheck disable=SC1090,SC1091,SC2034,SC2317
+
 set -o pipefail
 
 # Set version of gen pack library
 # For available versions see https://github.com/Open-CMSIS-Pack/gen-pack/tags.
 # Use the tag name without the prefix "v", e.g., 0.7.0
-REQUIRED_GEN_PACK_LIB="0.9.1"
+REQUIRED_GEN_PACK_LIB="0.10.0"
 
 # Set default command line arguments
 DEFAULT_ARGS=()
@@ -19,7 +21,7 @@ DEFAULT_ARGS=()
 #
 # PACK_OUTPUT=./output
 
-# Temporary pack build directory
+# Temporary pack build directory,
 # Default: ./build
 #
 # PACK_BUILD=./build
@@ -31,9 +33,7 @@ DEFAULT_ARGS=()
 PACK_DIRS="
   ./CMSIS
   ./Documents
-  ./Drivers
   ./Images
-  ./Projects
 "
 
 # Specify file names to be added to pack base directory
@@ -53,7 +53,9 @@ PACK_BASE_FILES="
 # Specify patches to be applied
 # Default: empty
 #
-# PACK_PATCH_FILES=""
+# PACK_PATCH_FILES="
+#   <list files here>
+# "
 
 # Specify addition argument to packchk
 # Default: empty
@@ -103,6 +105,7 @@ function postprocess() {
 }
 
 ############ DO NOT EDIT BELOW ###########
+
 
 # Set GEN_PACK_LIB_PATH to use a specific gen-pack library root
 # ... instead of bootstrap based on REQUIRED_GEN_PACK_LIB
